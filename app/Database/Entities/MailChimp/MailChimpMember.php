@@ -19,6 +19,13 @@ class MailChimpMember extends MailChimpEntity
     private $emailAddress;
 
     /**
+     * @ORM\Column(name="maiL_chimp_id", type="string")
+     *
+     * @var string
+     */
+    private $mailChimpId;
+
+    /**
      * @ORM\Column(name="email_type", type="string")
      *
      * @var string

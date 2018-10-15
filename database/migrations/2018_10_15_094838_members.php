@@ -19,6 +19,7 @@ class Members extends Migration
             $table->string('email_type');
             $table->uuid('id');
             $table->string('status');
+            $table->string('mail_chimp_id');
             $table->timestamps();
         });
     }

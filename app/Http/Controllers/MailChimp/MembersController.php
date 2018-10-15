@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\MailChimp;
 
+use App\Database\Entities\MailChimp\MailChimpList;
 use App\Database\Entities\MailChimp\MailChimpMember;
 use App\Http\Controllers\Controller;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,10 +56,12 @@ class MembersController extends Controller
 
         try {
             // Save member into db
-            //$this->saveEntity($member->setMailChimpId('tempid')); // @todo find cleaner way to do this
+            $this->saveEntity($member->setMailChimpId('tempid')); // @todo find cleaner way to do this
             $this->saveEntity($member);
             // Save member into MailChimp
-            $response = $this->mailChimp->post('lists/1a9401e1af/members', $member->toMailChimpArray());
+            $response = $this->mailChimp->post(
+                'lists/'. MailChimpList::MAILCHIMP_DEFAULT_LIST_ID .'/members', $member->toMailChimpArray()
+            );
             // Set MailChimp id on the member and save member into db
             $this->saveEntity($member->setMailChimpId($response->get('id')));
         } catch (Exception $exception) {
@@ -160,7 +163,12 @@ class MembersController extends Controller
             // Update member into database
             $this->saveEntity($member);
             // Update member into MailChimp
-            $this->mailChimp->patch(\sprintf('members/%s', $member->getMailChimpId()), $member->toMailChimpArray());
+            $result = $this->mailChimp->patch(
+                \sprintf('lists/'. MailChimpList::MAILCHIMP_DEFAULT_LIST_ID .'/members/%s',
+                $member->getMailChimpId()),
+                $member->toMailChimpArray()
+            );
+
         } catch (Exception $exception) {
             return $this->errorResponse(['message' => $exception->getMessage()]);
         }
