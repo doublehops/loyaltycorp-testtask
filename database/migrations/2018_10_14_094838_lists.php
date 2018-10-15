@@ -13,11 +13,13 @@ class Lists extends Migration
      */
     public function up()
     {
-        Schema::create('lists', function (Blueprint $table) {
+        Schema::create('mail_chimp_lists', function (Blueprint $table) {
             //$table->increments('id');
-            $table->uuid('id');
+            $table->string('campaign_defaults');
+            $table->string('contact');
             $table->boolean('email_type_option');
-            $table->string('mailchimpId');
+            $table->uuid('id');
+            $table->string('mail_chimp_id');
             $table->string('name');
             $table->string('notify_on_subscribe');
             $table->string('notify_on_unsubscribe');

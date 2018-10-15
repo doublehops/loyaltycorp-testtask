@@ -55,6 +55,7 @@ class ListsController extends Controller
 
         try {
             // Save list into db
+            $this->saveEntity($list->setMailChimpId('tempid')); // @todo find cleaner way to do this
             $this->saveEntity($list);
             // Save list into MailChimp
             $response = $this->mailChimp->post('lists', $list->toMailChimpArray());
