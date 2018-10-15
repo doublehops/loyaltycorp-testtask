@@ -11,6 +11,7 @@ use EoneoPay\Utils\Str;
  */
 class MailChimpList extends MailChimpEntity
 {
+    const MAILCHIMP_DEFAULT_LIST_ID = '1a9401e1af';
     /**
      * @ORM\Column(name="campaign_defaults", type="array")
      *
