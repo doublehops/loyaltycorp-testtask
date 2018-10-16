@@ -20,6 +20,7 @@ class Members extends Migration
             $table->uuid('id');
             $table->string('status');
             $table->string('mail_chimp_id');
+            $table->string('list_id');
             $table->timestamps();
         });
     }

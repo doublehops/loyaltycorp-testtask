@@ -33,6 +33,13 @@ class MailChimpMember extends MailChimpEntity
     private $emailType;
 
     /**
+     * @ORM\Column(name="list_id", type="string")
+     *
+     * @var string
+     */
+    private $listId;
+
+    /**
      * @ORM\Id()
      * @ORM\Column(name="id", type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
@@ -69,6 +76,16 @@ class MailChimpMember extends MailChimpEntity
     }
 
     /**
+     * @ORM\Column(name="list_id", type="string")
+     *
+     * @return null|string
+     */
+    public function getlistId(): ?string
+    {
+        return $this->listId;
+    }
+
+    /**
      * Get status of the member.
      *
      * @return null|string
@@ -90,7 +107,7 @@ class MailChimpMember extends MailChimpEntity
             'email_type' => 'required|string',
             'mailchimp_id' => 'nullable|string', 
             'status' => 'required|string', 
-            'email_address' => 'required|email', 
+            'list_id' => 'required|string',
         ];
     }
 
@@ -160,6 +177,20 @@ class MailChimpMember extends MailChimpEntity
     public function setStatus(string $status): MailChimpMember
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Set listId.
+     *
+     * @param string $listId
+     *
+     * @return MailChimpMember
+     */
+    public function setListId(string $listId): MailChimpMember
+    {
+        $this->listId = $listId;
 
         return $this;
     }
