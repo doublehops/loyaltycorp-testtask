@@ -95,7 +95,7 @@ class MembersController extends Controller
             // Remove member from database
             $this->removeEntity($member);
             // Remove member from MailChimp
-            $this->mailChimp->delete(\sprintf('members/%s', $member->getMailChimpId()));
+            $this->mailChimp->delete(\sprintf('lists/'. MailChimpList::MAILCHIMP_DEFAULT_LIST_ID .'/members/%s', $member->getMailChimpId()));
         } catch (Exception $exception) {
             return $this->errorResponse(['message' => $exception->getMessage()]);
         }
