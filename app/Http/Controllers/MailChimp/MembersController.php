@@ -166,8 +166,8 @@ class MembersController extends Controller
             $result = $this->mailChimp->patch(
                 \sprintf('lists/%s/members/%s',
                 $member->getListId(),
-                $member->getMailChimpId()),
-                $member->toMailChimpArray()
+                $member->getMailChimpId()
+                ), $member->toMailChimpArray()
             );
 
         } catch (Exception $exception) {
