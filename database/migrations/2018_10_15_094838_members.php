@@ -21,6 +21,8 @@ class Members extends Migration
             $table->string('status');
             $table->string('mail_chimp_id');
             $table->string('list_id');
+            $table->string('fname');
+            //$table->string('lname');
             $table->timestamps();
         });
     }

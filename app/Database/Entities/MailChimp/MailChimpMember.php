@@ -49,6 +49,20 @@ class MailChimpMember extends MailChimpEntity
     private $memberId;
 
     /**
+     * @ORM\Column(name="fname", type="string")
+     *
+     * @var string
+     */
+    private $fname;
+
+    /**
+     * @ORM\Column(name=lname", type="string")
+     *
+     * @var string
+     */
+    private $lname;
+
+    /**
      * @ORM\Column(name="status", type="string")
      *
      * @var string
@@ -66,16 +80,6 @@ class MailChimpMember extends MailChimpEntity
     }
 
     /**
-     * Get mailchimp id of the member.
-     *
-     * @return null|string
-     */
-    public function getMailChimpId(): ?string
-    {
-        return $this->mailChimpId;
-    }
-
-    /**
      * @ORM\Column(name="list_id", type="string")
      *
      * @return null|string
@@ -83,6 +87,26 @@ class MailChimpMember extends MailChimpEntity
     public function getlistId(): ?string
     {
         return $this->listId;
+    }
+
+    /**
+     * Get first name of the member.
+     *
+     * @return null|string
+     */
+    public function getFname(): ?string
+    {
+        return $this->fname;
+    }
+
+    /**
+     * Get last name of the member.
+     *
+     * @return null|string
+     */
+    public function getLname(): ?string
+    {
+        return $this->lname;
     }
 
     /**
@@ -108,6 +132,8 @@ class MailChimpMember extends MailChimpEntity
             'mailchimp_id' => 'nullable|string', 
             'status' => 'required|string', 
             'list_id' => 'required|string',
+            'fname' => 'required|string',
+            'lname' => 'required|string',
         ];
     }
 
@@ -163,6 +189,34 @@ class MailChimpMember extends MailChimpEntity
     public function setName(string $name): MailChimpMember
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Set fname.
+     *
+     * @param string $fname
+     *
+     * @return MailChimpMember
+     */
+    public function setFname(string $fname): MailChimpMember
+    {
+        $this->fname = $fname;
+
+        return $this;
+    }
+
+    /**
+     * Set lname.
+     *
+     * @param string $lname
+     *
+     * @return MailChimpMember
+     */
+    public function setLname(string $lname): MailChimpMember
+    {
+        $this->lname = $lname;
 
         return $this;
     }
