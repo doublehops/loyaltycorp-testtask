@@ -56,11 +56,11 @@ class MembersController extends Controller
 
         try {
             // Save member into db
-            $this->saveEntity($member->setMailChimpId('tempid')); // @todo find cleaner way to do this
+            $member->setMailChimpId('tempid'); // @todo find cleaner way to do this
             $this->saveEntity($member);
             // Save member into MailChimp
             $response = $this->mailChimp->post(
-                'lists/%s/members', $member->getListId(), $member->toMailChimpArray()
+                sprintf('lists/%s/members', $member->getListId()), $member->toMailChimpArray()
             );
             // Set MailChimp id on the member and save member into db
             $this->saveEntity($member->setMailChimpId($response->get('id')));
